@@ -7,6 +7,11 @@ from App.controllers import (
     login
 )
 
+from App.controllers import signup
+from App.database import db
+
+
+
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 
 
@@ -28,20 +33,46 @@ def identify_page():
 def login_action():
     data = request.form
     token = login(data['username'], data['password'])
-    response = redirect(request.referrer)
     if not token:
         flash('Bad username or password given'), 401
+        response = redirect(request.referrer)
     else:
         flash('Login Successful')
+        response = redirect('/homePage')
         set_access_cookies(response, token) 
     return response
 
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
-    response = redirect(request.referrer) 
+    response = redirect('/loginPage') 
     flash("Logged Out!")
     unset_jwt_cookies(response)
     return response
+
+@auth_views.route('/signup', methods=['POST'])
+def signup_action():
+    data = request.form
+    token, message = signup(data['username'], data['password'])
+    if not token:
+        flash(message), 401
+        return redirect(request.referrer)  
+    flash('Signup Successful')
+    response = redirect('/loginPage')  
+    set_access_cookies(response, token) 
+    return response
+
+@auth_views.route('/signupPage', methods=['GET'])
+def signup_page():
+    return render_template('signupPage.html')
+
+@auth_views.route('/loginPage', methods=['GET'])
+def login_page():
+    return render_template('login.html')
+
+@auth_views.route('/homePage', methods=['GET'])
+def home_page():
+    return render_template('layout.html')
+
 
 '''
 API Routes
@@ -66,4 +97,14 @@ def identify_user():
 def logout_api():
     response = jsonify(message="Logged Out!")
     unset_jwt_cookies(response)
+    return response
+
+@auth_views.route('/api/signup', methods=['POST'])
+def user_signup_api():
+    data = request.json
+    token, message = signup(data['username'], data['password'])
+    if not token:
+        return jsonify(message=message), 401
+    response = jsonify(access_token=token, message='Signup Successful')
+    set_access_cookies(response, token)
     return response
