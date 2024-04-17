@@ -11,6 +11,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
 
+    <style>
+      body {
+        color: white;
+        background-image: url('https://c4.wallpaperflare.com/wallpaper/226/358/339/muscles-dark-men-fitness-model-model-hd-wallpaper-preview.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      img{
+        display: block;
+        float: right;
+        max-width: 100%;
+      }
+      h1 {
+        color: #A50104; 
+        text-shadow: 2px 2px 4px #465362; 
+        font-size: 25px;
+      }
+      p {
+        color: #A50104; 
+        text-shadow: 1px 1px 2px #465362; 
+        margin-bottom: 10px; 
+        font-size: 20px;
+        text-align: left;
+      }
+      p1 {
+        color: white;
+      }
+      .centered-text {
+        text-align: left; 
+        padding: 20px;
+      }
+    </style>
+
   </head>
   
   <body style="background-color:#011936;">
@@ -25,15 +58,22 @@
                 <li><a href="/">My Routines</a></li>
             </ul>
             <ul id="nav-mobile" class="right">
+                <li><p1>Welcome {{current_user.username}}</p1></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
     </nav>
+
+
+    <div class="centered-text">
+    <h1>"Empowering Your Fitness Journey, One Flex at a Time"</h1>
+    <p>Welcome to FlexFit - Your Ultimate Fitness Companion</p>
+    <p>Are you ready to embark on a journey a healthier, fitter you?</p>
+    <p>Look no further than FlexFit we empower your fitness</p>
+    <p>journey, motivating and guiding you, one flex at a time!</p>
+    <p>With FlexFit, find key resources to support your fitness goals.</p>
+    </div>
     
-    <h1>Flask MVC</h1>
-        <p> Welcome {{current_user.username}} </p>
-    <p>This is a workout app designed to allow you to customize your own workout routines!</p>
-   
 
     <div class="container" id="content">{% block content %}{% endblock %}</div>
 
