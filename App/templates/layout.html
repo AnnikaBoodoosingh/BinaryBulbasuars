@@ -65,15 +65,32 @@
         </div>
     </nav>
 
-
     <div class="centered-text">
-    <h1>"Empowering Your Fitness Journey, One Flex at a Time"</h1>
-    <p>Welcome to FlexFit - Your Ultimate Fitness Companion</p>
-    <p>Are you ready to embark on a journey a healthier, fitter you?</p>
-    <p>Look no further than FlexFit we empower your fitness</p>
-    <p>journey, motivating and guiding you, one flex at a time!</p>
-    <p>With FlexFit, find key resources to support your fitness goals.</p>
+      <h1>"Empowering Your Fitness Journey, One Flex at a Time"</h1>
+      <p>Welcome to FlexFit - Your Ultimate Fitness Companion</p>
+      <p>Are you ready to embark on a journey a healthier, fitter you?</p>
+      <p>Look no further than FlexFit we empower your fitness</p>
+      <p>journey, motivating and guiding you, one flex at a time!</p>
+      <p>With FlexFit, find key resources to support your fitness goals.</p>
     </div>
+
+    <div class="workouts">
+      <h2>Available Workouts:</h2>
+      <ul>
+          {% for workout in workouts %}
+              <li>
+                  <strong>Title:</strong> {{ workout.title }}<br>
+                  <strong>Description:</strong> {{ workout.description }}<br>
+                  <strong>Type:</strong> {{ workout.type }}<br>
+                  <strong>Body Part:</strong> {{ workout.body_part }}<br>
+                  <strong>Equipment:</strong> {{ workout.equipment }}<br>
+                  <strong>Level:</strong> {{ workout.level }}<br>
+                  <strong>Rating:</strong> {{ workout.rating }}<br>
+                  <strong>Rating Description:</strong> {{ workout.rating_desc }}<br>
+              </li>
+          {% endfor %}
+      </ul>
+  </div>
 
 
 

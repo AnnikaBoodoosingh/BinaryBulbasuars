@@ -1,3 +1,4 @@
+import os, csv
 import click, pytest, sys
 from flask import Flask
 from flask.cli import with_appcontext, AppGroup
@@ -5,7 +6,7 @@ from flask.cli import with_appcontext, AppGroup
 from App.database import db, get_migrate
 from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users )
-
+from App.models import*
 # This commands file allow you to create convenient CLI commands for testing controllers
 
 app = create_app()
@@ -16,6 +17,22 @@ migrate = get_migrate(app)
 def initialize():
     db.drop_all()
     db.create_all()
+    with open('App/static/workout.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            workout = Workout(
+                id=row['Id'], 
+                title=row['Title'], 
+                description=row['Desc'], 
+                type=row['Type'],
+                body_part=row['BodyPart'], 
+                equipment=row['Equipment'], 
+                level=row['Level'], 
+                rating=row['Rating'],
+                rating_desc=row['RatingDesc']
+            )
+            db.session.add(workout)
+        db.session.commit()
     create_user('bob', 'bobpass')
     print('database intialized')
 

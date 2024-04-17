@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, flash, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
-
+from App.models import*
 from.index import index_views
 
 from App.controllers import (
@@ -71,7 +71,8 @@ def login_page():
 
 @auth_views.route('/homePage', methods=['GET'])
 def home_page():
-    return render_template('layout.html')
+    workouts = Workout.query.all() 
+    return render_template('layout.html', workouts=workouts)
 
 
 '''

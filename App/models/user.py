@@ -31,8 +31,8 @@ class Workout(db.Model):
     type = db.Column(db.String)
     body_part = db.Column(db.String)
     equipment = db.Column(db.String)
-    level = db.Column(db.Float)
-    rating = db.Column(db.Float)
+    level = db.Column(db.String)
+    rating = db.Column(db.String, nullable=True)
     rating_desc = db.Column(db.String)
 
     def __init__(self, id, title, description, type, body_part, equipment, level, rating, rating_desc):
