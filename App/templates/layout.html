@@ -17,6 +17,7 @@
         background-image: url('https://c4.wallpaperflare.com/wallpaper/226/358/339/muscles-dark-men-fitness-model-model-hd-wallpaper-preview.jpg');
         background-size: cover;
         background-repeat: no-repeat;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow';
       }
       img{
         display: block;
@@ -24,12 +25,12 @@
         max-width: 100%;
       }
       h1 {
-        color: #A50104; 
+        color: white; 
         text-shadow: 2px 2px 4px #465362; 
         font-size: 25px;
       }
       p {
-        color: #A50104; 
+        color: white; 
         text-shadow: 1px 1px 2px #465362; 
         margin-bottom: 10px; 
         font-size: 20px;
@@ -47,7 +48,7 @@
   </head>
   
   <body style="background-color:#011936;">
-    <nav style="background-color: #A50104;">
+    <nav style="background-color: #426B69;">
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
             <ul id="nav-mobile" class="left">
@@ -73,7 +74,27 @@
     <p>journey, motivating and guiding you, one flex at a time!</p>
     <p>With FlexFit, find key resources to support your fitness goals.</p>
     </div>
-    
+
+
+
+    <div class="container" id="workoutContainer" style="display: none;">
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="video">
+            <iframe width="100%" height="315" src="https://youtu.be/O0pIQ2UqeCY?si=Sp3pjR2QoYrPmzCD" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="info">
+            <h2>Workout Name</h2>
+            <p>This is a description of the workout selected</p>
+            <p>This is a description of the workout selected</p>
+            <p>This is a description of the workout selected</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container" id="content">{% block content %}{% endblock %}</div>
 
