@@ -24,3 +24,25 @@ class User(db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
+class Workout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title =  db.Column(db.String)
+    description = db.Column(db.String)
+    type = db.Column(db.String)
+    body_part = db.Column(db.String)
+    equipment = db.Column(db.String)
+    level = db.Column(db.Float)
+    rating = db.Column(db.Float)
+    rating_desc = db.Column(db.String)
+
+    def __init__(self, id, title, description, type, body_part, equipment, level, rating, rating_desc):
+        self.id = id
+        self.title = title
+        self.description = description
+        self.type = type
+        self.body_part = body_part
+        self.equipment = equipment
+        self.level = level
+        self.rating = rating
+        self.rating_desc = rating_desc
+
