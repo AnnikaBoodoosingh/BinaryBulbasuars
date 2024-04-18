@@ -1,9 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}{% endblock %}
+{% block title %}My Routines{% endblock %}
 {% block page %}{% endblock %}
 
 {{ super() }}
 
 {% block content %}
     <h1>My Routines</h1>
+
+    <!-- add section to call workouts from the ones
+         chosen in browse -->
+    <ul>
+        <li>
+            <strong>Title:</strong> {{ workout.title }}<br>
+            <strong>Description:</strong> {{ workout.description }}<br>
+            <strong>Type:</strong> {{ workout.type }}<br>
+            <strong>Body Part:</strong> {{ workout.body_part }}<br>
+            <strong>Equipment:</strong> {{ workout.equipment }}<br>
+            <strong>Level:</strong> {{ workout.level }}<br>
+            <strong>Rating:</strong> {{ workout.rating }}<br>
+            <strong>Rating Description:</strong> {{ workout.rating_desc }}<br>
+        </li>
+    </ul>
 {% endblock %}
