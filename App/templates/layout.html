@@ -92,30 +92,36 @@
       </ul>
   </div>
 
+<!-- Workout Information Page Format -->
 
-
-    <div class="container" id="workoutContainer">
+    <div class="container" id="workoutContainer" style="display: none;">
       <div class="row">
         <div class="col s12 m6">
           <div class="workout">
-            <h2>Workout Name</h2>
-            <p>This is a description of the workout selected</p>
-            <p>This is a description of the workout selected</p>
-            <p>This is a description of the workout selected</p>
+            {% for workout in workouts %}
+            <h2>{{ workout.title }}</h2>
+            <p>Description: {{ workout.description}}</p>
+            {% endfor %}
           </div>
         </div>
 
         <div class="col s12 m6">
           <div class="stats">
-            <p>Type: </p>
-            <p>Body Part: </p>
-            <p>Equipment: </p>
-            <p>Level: </p>
-            <p>Rating: </p>
+            {% for workout in workouts %}
+            <p>____________________________________________________</p>
+            <p>Type: {{workout.type}}</p>
+            <p>Body Part: {{ workout.body_part }}</p>
+            <p>Equipment: {{ workout.equipment }}</p>
+            <p>Level: {{ workout.level }}</p>
+            <p>Rating: {{ workout.rating }}</p>
+            <p>Rating Description: {{ workout.rating_desc }}</p>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
+
+<!-- end of formatting for workout info -->
 
     <div class="container" id="content">{% block content %}{% endblock %}</div>
 
