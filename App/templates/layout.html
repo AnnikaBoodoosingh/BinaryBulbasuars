@@ -52,8 +52,8 @@
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
             <ul id="nav-mobile" class="left">
-                <li><a href="/">Home</a></li>
-                <li><a href="/">Browse Workouts</a></li>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
                 <li><a href="/">Workout Information</a></li>
                 <li><a href="/">Edit My Routines</a></li>
                 <li><a href="/">My Routines</a></li>
@@ -73,24 +73,6 @@
       <p>journey, motivating and guiding you, one flex at a time!</p>
       <p>With FlexFit, find key resources to support your fitness goals.</p>
     </div>
-
-    <div class="workouts">
-      <h2>Available Workouts:</h2>
-      <ul>
-          {% for workout in workouts %}
-              <li>
-                  <strong>Title:</strong> {{ workout.title }}<br>
-                  <strong>Description:</strong> {{ workout.description }}<br>
-                  <strong>Type:</strong> {{ workout.type }}<br>
-                  <strong>Body Part:</strong> {{ workout.body_part }}<br>
-                  <strong>Equipment:</strong> {{ workout.equipment }}<br>
-                  <strong>Level:</strong> {{ workout.level }}<br>
-                  <strong>Rating:</strong> {{ workout.rating }}<br>
-                  <strong>Rating Description:</strong> {{ workout.rating_desc }}<br>
-              </li>
-          {% endfor %}
-      </ul>
-  </div>
 
 <!-- Workout Information Page Format -->
 

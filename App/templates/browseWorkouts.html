@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+  
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}{% endblock %}</title>
+
+    
+    <style>
+        body {
+          color: white;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow';
+        }
+        h2 {
+          color: white; 
+          text-shadow: 2px 2px 4px #465362; 
+          font-size: 25px;
+        }
+        p {
+          color: white; 
+          text-shadow: 1px 1px 2px #465362; 
+          margin-bottom: 10px; 
+          font-size: 20px;
+          text-align: left;
+        }
+      </style>
+  
+
+  </head>
+  
+  <body style="background-color:#020023">
+    <nav style="background-color: #426B69;">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+            <ul id="nav-mobile" class="left">
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
+                <li><a href="/">Workout Information</a></li>
+                <li><a href="/">Edit My Routines</a></li>
+                <li><a href="/">My Routines</a></li>
+            </ul>
+            <ul id="nav-mobile" class="right">
+                <li><p1>Welcome {{current_user.username}}</p1></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Workout Information Page Format -->
+    
+        <div class="container" id="workoutContainer">
+          <div class="row">
+            <div class="col s12 m6">
+              <div class="workout">
+                {% for workout in workouts %}
+                <h2>{{ workout.title }}</h2>
+                <p>Description: {{ workout.description}}</p>
+                <a href="/browseWorkoutsPage/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: white; color: gold; border: 1px white; border-radius: 2px;">Show details</a>
+                {% endfor %}
+              </div>
+            </div>
+            {% if selected_workout %}
+            <div class="col s12 m6">
+              <div class="stats">
+                <p>____________________________________________________</p>
+                <p>Type: {{ selected_workout.type }}</p>
+                <p>Body Part: {{ selected_workout.body_part }}</p>
+                <p>Equipment: {{ selected_workout.equipment }}</p>
+                <p>Level: {{ selected_workout.level }}</p>
+                <p>Rating: {{ selected_workout.rating }}</p>
+                <p>Rating Description: {{ selected_workout.rating_desc }}</p>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+    
+    <!-- end of formatting for workout info -->
+    
+    <div class="container" id="content">{% block content %}{% endblock %}</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+       M.AutoInit();
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+              M.toast({html: '{{message}}'})
+              {% endfor %}
+          {% endif %}
+        {% endwith %}
+       
+    </script>
+  </body>
+</html>
+

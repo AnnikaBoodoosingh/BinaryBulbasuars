@@ -71,9 +71,16 @@ def login_page():
 
 @auth_views.route('/homePage', methods=['GET'])
 def home_page():
-    workouts = Workout.query.all() 
-    return render_template('layout.html', workouts=workouts)
-
+    return render_template('layout.html')
+    
+@auth_views.route('/browseWorkoutsPage', defaults={'id': None}, methods=['GET'])
+@auth_views.route('/browseWorkoutsPage/<int:id>', methods=['GET'])
+def browse_workouts_page(id):
+    workouts = Workout.query.all()
+    selected_workout = None
+    if id is not None:
+        selected_workout = Workout.query.get(id)
+    return render_template('browseWorkouts.html', workouts=workouts, selected_workout=selected_workout)
 
 '''
 API Routes
