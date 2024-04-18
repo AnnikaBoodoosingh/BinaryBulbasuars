@@ -32,7 +32,14 @@
 
         .custom-card {
           background-color: #465362;
-          color: white; /* Adjust text color for better contrast */
+          color: white; 
+          border: 1px solid #FFFFFF;
+          height: 500px;
+        }
+
+        .custom-card .card-body {
+          font-family: 'Arial Narrow';
+          text-align: center;
         }
       </style>
   
@@ -63,8 +70,8 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           {% if selected_workout %}
-          <div class="card custom-card">
-            <div class="card-body">
+          <div class="card custom-card border border-light">
+            <div class="card-body text-center">
               <h2 class="card-title">{{ selected_workout.title }}</h2>
               <p class="card-text">Description: {{ selected_workout.description}}</p>
               <p class="card-text">Type: {{ selected_workout.type }}</p>
