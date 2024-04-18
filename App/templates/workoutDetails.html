@@ -54,20 +54,21 @@
 
     <!-- Workout Information Page Format -->
     
-        <div class="container" id="workoutContainer">
-          <div class="row">
+           {% if selected_workout %}
             <div class="col s12 m6">
-              <div class="workout">
-                {% for workout in workouts %}
-                <h2>{{ workout.title }}</h2>
-                <p>Description: {{ workout.description}}</p>
-                <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: white; color: gold; border: 1px white; border-radius: 2px;">Show details</a>
-                {% endfor %}
+              <div class="stats">
+                <p>____________________________________________________</p>
+                <h>Title: {{ selected_workout.title }}</h>
+                <p>Type: {{ selected_workout.type }}</p>
+                <p>Body Part: {{ selected_workout.body_part }}</p>
+                <p>Equipment: {{ selected_workout.equipment }}</p>
+                <p>Level: {{ selected_workout.level }}</p>
+                <p>Rating: {{ selected_workout.rating }}</p>
+                <p>Rating Description: {{ selected_workout.rating_desc }}</p>
               </div>
             </div>
-          </div>
-        </div>
-
+           {% endif %}
+         
     <!-- end of formatting for workout info -->
     
     <div class="container" id="content">{% block content %}{% endblock %}</div>
