@@ -83,6 +83,11 @@ def workout_details(id):
     selected_workout = Workout.query.get(id)
     return render_template('workoutDetails.html', selected_workout=selected_workout)
 
+@auth_views.route('/myRoutinesPage')
+def myRoutines_page():
+    workouts = Workout.query.all()
+    return render_template('myRoutines.html', workouts=workouts)
+
 '''
 API Routes
 '''
