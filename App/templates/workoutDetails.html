@@ -29,6 +29,11 @@
           font-size: 20px;
           text-align: left;
         }
+
+        .custom-card {
+          background-color: #465362;
+          color: white; /* Adjust text color for better contrast */
+        }
       </style>
   
 
@@ -41,7 +46,7 @@
             <ul id="nav-mobile" class="left">
                 <li><a href="/homePage">Home</a></li>
                 <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
-                <li><a href="/">Workout Information</a></li>
+                <!-- <li><a href="/">Workout Information</a></li> -->
                 <li><a href="/">Edit My Routines</a></li>
                 <li><a href="/">My Routines</a></li>
             </ul>
@@ -54,20 +59,27 @@
 
     <!-- Workout Information Page Format -->
     
-           {% if selected_workout %}
-            <div class="col s12 m6">
-              <div class="stats">
-                <p>____________________________________________________</p>
-                <h>Title: {{ selected_workout.title }}</h>
-                <p>Type: {{ selected_workout.type }}</p>
-                <p>Body Part: {{ selected_workout.body_part }}</p>
-                <p>Equipment: {{ selected_workout.equipment }}</p>
-                <p>Level: {{ selected_workout.level }}</p>
-                <p>Rating: {{ selected_workout.rating }}</p>
-                <p>Rating Description: {{ selected_workout.rating_desc }}</p>
-              </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          {% if selected_workout %}
+          <div class="card custom-card">
+            <div class="card-body">
+              <h2 class="card-title">{{ selected_workout.title }}</h2>
+              <p class="card-text">Description: {{ selected_workout.description}}</p>
+              <p class="card-text">Type: {{ selected_workout.type }}</p>
+              <p class="card-text">Body Part: {{ selected_workout.body_part }}</p>
+              <p class="card-text">Equipment: {{ selected_workout.equipment }}</p>
+              <p class="card-text">Level: {{ selected_workout.level }}</p>
+              <p class="card-text">Rating: {{ selected_workout.rating }}</p>
+              <p class="card-text">Rating Description: {{ selected_workout.rating_desc }}</p>
             </div>
-           {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
          
     <!-- end of formatting for workout info -->
     
