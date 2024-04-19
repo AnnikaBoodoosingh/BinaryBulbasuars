@@ -15,8 +15,19 @@
 
     <body>
 
-        <nav>
-            
+        <nav style="background-color: #426B69;">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+                <ul id="nav-mobile" class="left">
+                    <li><a href="/homePage">Home</a></li>
+                    <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
+                    <li><a href="/myRoutinesPage">My Routines</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right">
+                    <li><p1>Welcome {{current_user.username}}</p1></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
         </nav>
 
         <div class="container">
