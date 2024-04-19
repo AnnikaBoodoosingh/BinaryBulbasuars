@@ -59,3 +59,15 @@ class Routine(db.Model):
         self.user_id = user_id
         self.workout_id = workout_id
     
+    def add_workout_to_routine(self, user_id, workout_id):
+        routine = self(user_id=user_id, workout_id=workout_id)
+        db.session.add(routine)
+        db.session.commit(routine)
+    
+    def delete_workout_from_routine(self, user_id, workout_id):
+        routine - self.query.filter_by(user_id=user_id, workout_id=workout_id).first()
+        if routine:
+            db.session.delete(routine)
+            db.session.commit()
+            return True
+        return False
