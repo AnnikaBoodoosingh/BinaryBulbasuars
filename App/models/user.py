@@ -55,19 +55,29 @@ class Routine(db.Model):
     user = db.relationship('User', backref='routines')
     workout = db.relationship('Workout', backref='routines')
 
-    def __init__(self, user_id, workout_id,):
+    def __init__(self, user_id, workout_id):
         self.user_id = user_id
         self.workout_id = workout_id
     
-    def add_workout_to_routine(self, user_id, workout_id):
-        routine = self(user_id=user_id, workout_id=workout_id)
-        db.session.add(routine)
-        db.session.commit(routine)
+    @classmethod
+    def add_workout_to_routine(cls, user_id, workout_id):
+        try:
+            routine = cls(user_id=user_id, workout_id=workout_id)
+            db.session.add(routine)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return False
+        return True
     
     def delete_workout_from_routine(self, user_id, workout_id):
-        routine - self.query.filter_by(user_id=user_id, workout_id=workout_id).first()
+        routine = Routine.query.filter_by(user_id=user_id, workout_id=workout_id).first()
         if routine:
-            db.session.delete(routine)
-            db.session.commit()
-            return True
+            try:
+                db.session.delete(routine)
+                db.session.commit()
+                return True
+            except:
+                db.session.rollback()
+                return False
         return False

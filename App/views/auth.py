@@ -9,7 +9,8 @@ from App.controllers import (
 
 from App.controllers import signup
 from App.database import db
-
+from App.models import Workout #----
+from App.models import Routine #----
 
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
@@ -88,6 +89,16 @@ def myRoutines_page():
     workouts = Workout.query.all()
     return render_template('myRoutines.html', workouts=workouts)
 
+# ----
+@auth_views.route('/add_to_routine/<int:workout_id>', methods=['POST'])
+@jwt_required()
+def add_to_routine(workout_id):
+    routine = Routine(user_id=current_user.id, workout_id=workout_id)
+    db.session.add(routine)
+    db.session.commit()
+    flash('Workout added to My Routines')
+    return redirect(url_for('auth_views.myRoutines_page'))
+# ----
 '''
 API Routes
 '''
@@ -122,3 +133,4 @@ def user_signup_api():
     response = jsonify(access_token=token, message='Signup Successful')
     set_access_cookies(response, token)
     return response
+

@@ -9,18 +9,20 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{% block title %}{% endblock %}</title>
+    
+        
     </head>
 
     <body>
 
         <nav>
-
+            
         </nav>
 
         <div class="container">
-            <h3>{{ username }}'s Routines</h3>
+            <h3>{{ current_user.username }}'s Routines</h3>
             <div class="row">
-                {% for routine in routines %}
+                {% for routine in current_user.routines %}
                 <div class="col s12 m6 14">
                     <div class="card">
                         <div class="card-content">
@@ -41,9 +43,16 @@
                             <p><strong>Level:</strong> {{ routine.workout.level }}</p>
                             <p><strong>Rating:</strong> {{ routine.workout.rating }}</p>
                             <p><strong>Rating Description:</strong> {{ routine.workout.rating_desc }}</p>
-                            <p><strong>Date Completed:</strong> {{ routine.date_completed }}</p>
-                            <p><strong>Notes:</strong> {{ routine.notes }}</p>
+            
                         </div>
+
+                        <!-- Remove from routine button -->
+                        <!-- <div class="card-action">
+                            <form action="{{ url_for('auth_views.remove_from_routine', routine_id=routine.id) }}" method="post">
+                                <button type="submit" class="waves-effect waves-light btn">Remove from Routine</button>
+                            </form>
+                        </div> -->
+                        <!---->
                     </div>
                 </div>
                 {% endfor %}

@@ -62,11 +62,18 @@
             <p>Description: {{ workout.description}}</p>
             <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: white; color: #A50104; border: 1px white; border-radius: 2px;">Show details</a>
             
+            <!-- Add to my routine button -->
+            <form action="{{ url_for('auth_views.add_to_routine', workout_id=workout.id) }}" method="post" id="add-to-routine-form">
+              <button type="submit" class="waves-effect waves-light btn right" id="add-to-routine-button">Add to my routines</button>
+            </form>
+            <!---->
+
             {% endfor %}
           </div>
         </div>
-
+        
     <!-- end of formatting for workout info -->
+
     
     <div class="container" id="content">{% block content %}{% endblock %}</div>
 
@@ -81,7 +88,19 @@
               {% endfor %}
           {% endif %}
         {% endwith %}
-       
+
+      // // ----
+      // document.addEventListener('DOMContentLoaded', function() {
+      //   const addButton = document.getElementById('add-to-routine-button');
+      //   addButton.addEventListener('click', function() {
+      //       // Change button text to "Added to My Routines"
+      //       addButton.innerHTML = '<a href="/myRoutines">Added to My Routines</a>';
+      //       // Disable the button to prevent multiple clicks
+      //       addButton.disabled = true;
+      //   });
+      // });
+      // // ----
+
     </script>
   </body>
 </html>
