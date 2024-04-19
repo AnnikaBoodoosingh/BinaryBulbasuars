@@ -46,3 +46,16 @@ class Workout(db.Model):
         self.rating = rating
         self.rating_desc = rating_desc
 
+# routine model
+class Routine(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'), nullable=False)
+    
+    user = db.relationship('User', backref='routines')
+    workout = db.relationship('Workout', backref='routines')
+
+    def __init__(self, user_id, workout_id,):
+        self.user_id = user_id
+        self.workout_id = workout_id
+    
