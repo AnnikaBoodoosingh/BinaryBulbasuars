@@ -12,7 +12,6 @@ from App.database import db
 from App.models import Workout #----
 from App.models import Routine #----
 
-
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 
 
@@ -99,6 +98,8 @@ def add_to_routine(workout_id):
     flash('Workout added to My Routines')
     return redirect(url_for('auth_views.myRoutines_page'))
 # ----
+
+
 '''
 API Routes
 '''
@@ -134,3 +135,7 @@ def user_signup_api():
     set_access_cookies(response, token)
     return response
 
+# ----
+
+
+# ----

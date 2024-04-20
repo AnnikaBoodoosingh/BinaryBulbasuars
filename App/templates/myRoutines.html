@@ -30,8 +30,11 @@
             </div>
         </nav>
 
+        <!-- My Workouts -->
         <div class="container">
-            <h3>{{ current_user.username }}'s Routines</h3>
+            <h2>{{ current_user.username }}'s Routines</h3>
+            <hr style="width: 100%;">
+            <h4>My Workouts</h4>
             <div class="row">
                 {% for routine in current_user.routines %}
                 <div class="col s12 m6 14">
@@ -44,6 +47,7 @@
                             <p><strong>Type:</strong> {{ routine.workout.type }}<br></p>
                             <p><strong>Body Part:</strong> {{ routine.workout.body_part }}<br></p>
                             <p><strong>Equipment:</strong> {{ routine.workout.equipment }}<br></p>  
+                        
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">
@@ -60,9 +64,95 @@
                     </div>
                 </div>
                 {% endfor %}
+
+            </div>
+            <hr style="width: 100%;">
+        </div>
+
+        <!-- My Routines -->
+        <div class="container">
+            <h4>My Routines</h4>
+            <div class="row">
+                <form id="createRoutineForm">
+                    <div class="input-field col s12">
+                        <input id="routineName" type="text" class="validate" required>
+                        <label for="routineName">Create New Routine</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <select id="workoutsSelect" multiple required>
+                            <option value="" disabled>Select workouts</option>
+                            {% for workout in workouts %}
+                                <option value="{{ workout.id }}">{{ workout.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Workouts</label>
+                    </div>
+                    <div class="col s12">
+                        <button class="btn waves-effect waves-light" onclick="createRoutine()">Create Routine</button>
+                    </div>
+                </form>
+                
+                <div class="container" id="routinesContainer">
+                    <!-- routine cards -->
+                </div>
+
             </div>
         </div>
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                loadRoutinesFromLocalStorage();
+            });
+        
+            function createRoutine() {
+                var routineNameInput = document.getElementById('routineName');
+                var routineName = routineNameInput.value.trim();
+        
+                if (!routineName) {
+                    alert('Please enter a routine name');
+                    return;
+                }
+        
+                addRoutineToDOM(routineName); 
+                saveRoutineToLocalStorage(routineName); 
+                routineNameInput.value = '';
+            }
+        
+            function addRoutineToDOM(routineName) {
+                var routinesContainer = document.getElementById('routinesContainer');
+                var card = document.createElement('div');
+                card.className = 'col s12 m6 l4';
+                card.innerHTML = `
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">${routineName}</span>
+                            <button class="btn waves-effect waves-light" onclick="addWorkoutsToRoutine('${routineName}')">Add Workouts</button>
+                        </div>
+                    </div>
+                `;
+                routinesContainer.appendChild(card);
+            }
+        
+            function loadRoutinesFromLocalStorage() {
+                var routines = JSON.parse(localStorage.getItem('routines')) || [];
+                routines.forEach(function(routineName) {
+                    addRoutineToDOM(routineName);
+                });
+            }
+        
+            function saveRoutineToLocalStorage(routineName) {
+                var routines = JSON.parse(localStorage.getItem('routines')) || [];
+                routines.push(routineName);
+                localStorage.setItem('routines', JSON.stringify(routines));
+            }
+        </script>
+        
+      
+    
     </body>
 </html>
     
