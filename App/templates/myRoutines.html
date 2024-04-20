@@ -69,7 +69,6 @@
             <hr style="width: 100%;">
         </div>
 
-        <!-- My Routines -->
         <div class="container">
             <h4>My Routines</h4>
             <div class="row">
@@ -77,25 +76,29 @@
                     <div class="input-field col s12">
                         <input id="routineName" type="text" class="validate" required>
                         <label for="routineName">Create New Routine</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <select id="workoutsSelect" multiple required>
-                            <option value="" disabled>Select workouts</option>
-                            {% for workout in workouts %}
-                                <option value="{{ workout.id }}">{{ workout.title }}</option>
-                            {% endfor %}
-                        </select>
-                        <label>Workouts</label>
-                    </div>
-                    <div class="col s12">
                         <button class="btn waves-effect waves-light" onclick="createRoutine()">Create Routine</button>
                     </div>
                 </form>
-                
+        
                 <div class="container" id="routinesContainer">
                     <!-- routine cards -->
+        
+                    {% for routine in current_user.routines %}
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ routine }}</span>
+                                <button class="btn waves-effect waves-light" onclick="addWorkoutsToRoutine('{{ routine }}')">Add Workouts</button>
+                            </div>
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light red" onclick="deleteRoutine('{{ routine }}')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+        
                 </div>
-
+        
             </div>
         </div>
 
@@ -117,8 +120,8 @@
                     return;
                 }
         
-                addRoutineToDOM(routineName); 
-                saveRoutineToLocalStorage(routineName); 
+                addRoutineToDOM(routineName);
+                saveRoutineToLocalStorage();
                 routineNameInput.value = '';
             }
         
@@ -132,6 +135,9 @@
                             <span class="card-title">${routineName}</span>
                             <button class="btn waves-effect waves-light" onclick="addWorkoutsToRoutine('${routineName}')">Add Workouts</button>
                         </div>
+                        <div class="card-action">
+                            <button class="btn waves-effect waves-light grey" onclick="deleteRoutine(this,'${routineName}')">Delete Routine</button>
+                        </div>
                     </div>
                 `;
                 routinesContainer.appendChild(card);
@@ -144,12 +150,32 @@
                 });
             }
         
-            function saveRoutineToLocalStorage(routineName) {
-                var routines = JSON.parse(localStorage.getItem('routines')) || [];
-                routines.push(routineName);
+            function saveRoutineToLocalStorage() {
+                var routines = [];
+                var routineCards = document.querySelectorAll('#routinesContainer .card-title');
+                routineCards.forEach(function(card) {
+                    var routineName = card.innerText.trim();
+                    routines.push(routineName);
+                });
                 localStorage.setItem('routines', JSON.stringify(routines));
             }
+        
+            function deleteRoutine(button, routineName) {
+                var cardElement = button.closest('.col');
+                cardElement.remove();
+                removeFromLocalStorage(routineName);
+            }
+        
+            function removeFromLocalStorage(routineName) {
+                var routines = JSON.parse(localStorage.getItem('routines')) || [];
+                var index = routines.indexOf(routineName);
+                if (index !== -1) {
+                    routines.splice(index, 1);
+                    localStorage.setItem('routines', JSON.stringify(routines));
+                }
+            }
         </script>
+        
         
         
       
