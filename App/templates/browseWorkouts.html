@@ -41,7 +41,7 @@
             <ul id="nav-mobile" class="left">
                 <li><a href="/homePage">Home</a></li>
                 <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
-                <li><a href="/myRoutinesPage">My Routines</a></li>
+                <li><a href="/myRoutinesPage">My Routine</a></li>
             </ul>
             <ul id="nav-mobile" class="right">
                 <li><p1>Welcome {{current_user.username}}</p1></li>
@@ -58,11 +58,11 @@
             <p>___________________________________________________________________________________________________________</p>
             <h2>{{ workout.title }}</h2>
             <p>Description: {{ workout.description}}</p>
-            <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: #020023; color: white; border: 1px white; border-radius: 2px;">Show details</a>
+            <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: #020023; color: white; border: 1px white; border-radius: 2px; font-family: monospace;">Show details</a>
             
             <!-- Add to my routine button -->
             <form action="{{ url_for('auth_views.add_to_routine', workout_id=workout.id) }}" method="post" id="add-to-routine-form">
-              <button type="submit" class="waves-effect waves-light btn right" id="add-to-routine-button" style="background-color: #020023; color: white;">Add to my routine</button>
+              <button type="submit" class="waves-effect waves-light btn right" id="add-to-routine-button" style="background-color: #020023; color: white; font-family: monospace;">Add to my routine</button>
             </form>
             <!---->
 

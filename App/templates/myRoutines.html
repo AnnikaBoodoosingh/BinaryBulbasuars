@@ -32,7 +32,7 @@
                 <ul id="nav-mobile" class="left">
                     <li><a href="/homePage">Home</a></li>
                     <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
-                    <li><a href="/myRoutinesPage">My Routines</a></li>
+                    <li><a href="/myRoutinesPage">My Routine</a></li>
                 </ul>
                 <ul id="nav-mobile" class="right">
                     <li><p1>Welcome {{current_user.username}}</p1></li>
@@ -42,14 +42,14 @@
         </nav>
 
         <!-- My Routine -->
-        <div class="container">
+        <div class="container" style="font-family: monospace;">
             <h2>{{ current_user.username }}'s Routine</h3>
             <hr style="width: 100%;">
             <div class="row">
                 {% for routine in current_user.routines %}
                 <div class="col s12 m6 14">
                     <div class="card">
-                        <div class="card-content" style="color: #020023;">
+                        <div class="card-content" style="color: #020023; font-family: monospace;">
                             <span class="card-title activator grey-text text-darken-4">
                                 {{ routine.workout.title }}
                                 <i class="material-icons right">more_vert</i>
@@ -61,7 +61,7 @@
                         <!-- delete button -->
                         <div class="card-action">
                             <form action="/delete_from_routine/{{ routine.workout.id }}" method="POST">
-                                <button type="submit" class="btn waves-effect waves-light grey">Delete Workout</button>
+                                <button type="submit" class="btn waves-effect waves-light grey" style="font-family: monospace">Delete Workout</button>
                             </form>                            
                         </div>
                         <!---->
@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 center-align">
-                    <a href="/browseWorkoutsPage" class="btn waves-effect waves-light">Add to My Routine</a>
+                    <a href="/browseWorkoutsPage" class="btn waves-effect waves-light" style="font-family: monospace;">Add to My Routine</a>
                 </div>
             </div>
         </div>
