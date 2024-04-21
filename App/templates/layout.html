@@ -14,7 +14,7 @@
     <style>
       body {
         color: white;
-        background-image: url('https://c4.wallpaperflare.com/wallpaper/226/358/339/muscles-dark-men-fitness-model-model-hd-wallpaper-preview.jpg');
+        background-image: url('https://rare-gallery.com/thumbnail/391768-pixel-room-digital-art-4k-pc-wallpaper.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow';
@@ -25,16 +25,21 @@
         max-width: 100%;
       }
       h1 {
-        color: white; 
+        color: #78bebc; 
         text-shadow: 2px 2px 4px #465362; 
         font-size: 25px;
+        font-family: monospace;
+        font-style: italic;
+        font-weight: bold;
       }
       p {
         color: white; 
         text-shadow: 1px 1px 2px #465362; 
         margin-bottom: 10px; 
         font-size: 20px;
-        text-align: left;
+        text-align: center;
+        font-family: monospace;
+        font-style: bold;
       }
       p1 {
         color: white;
@@ -43,19 +48,24 @@
         text-align: left; 
         padding: 20px;
       }
+      .custom-card {
+          background-color: #011936;
+          color: white; 
+          border: 1px solid;
+          height: 400px;
+          
+        }
     </style>
 
   </head>
   
   <body style="background-color:#011936;">
-    <nav style="background-color: #426B69;">
+    <nav style="background-color: #426b69; font-family: monospace;">
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+            <a href="#!" class="brand-logo center" style="font-family:haettenschweiler;">{% block page %}<em>F l e x</em> F i t{% endblock %}</a>
             <ul id="nav-mobile" class="left">
                 <li><a href="/homePage">Home</a></li>
                 <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
-                <!-- <li><a href="/">Workout Information</a></li> -->
-                <li><a href="/">Edit My Routines</a></li>
                 <li><a href="/myRoutinesPage">My Routines</a></li>
             </ul>
             <ul id="nav-mobile" class="right">
@@ -65,14 +75,25 @@
         </div>
     </nav>
 
-    <div class="centered-text">
-      <h1>"Empowering Your Fitness Journey, One Flex at a Time"</h1>
-      <p>Welcome to FlexFit - Your Ultimate Fitness Companion</p>
-      <p>Are you ready to embark on a journey a healthier, fitter you?</p>
-      <p>Look no further than FlexFit we empower your fitness</p>
-      <p>journey, motivating and guiding you, one flex at a time!</p>
-      <p>With FlexFit, find key resources to support your fitness goals.</p>
+    <div class="container">
+      <div class="centered-text text-center">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card custom-card center">
+              <div class="card-body text-center">
+                <h1>"Empowering Your Fitness Journey, One Flex at a Time"</h1>
+                <p>Welcome to FlexFit - Your Ultimate Fitness Companion</p>
+                <p>Are you ready to embark on a journey a healthier, fitter you?</p>
+                <p>Look no further than FlexFit we empower your fitness</p>
+                <p>journey, motivating and guiding you, one flex at a time!</p>
+                <p>With FlexFit, find key resources to support your fitness goals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
 
 <!-- Workout Information Page Format -->
 

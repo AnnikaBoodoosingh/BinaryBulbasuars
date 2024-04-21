@@ -21,6 +21,9 @@
           color: white; 
           text-shadow: 2px 2px 4px #465362; 
           font-size: 25px;
+          font-weight: bold;
+          font-style:italic;
+          font-family: monospace;
         }
         p {
           color: white; 
@@ -28,13 +31,14 @@
           margin-bottom: 10px; 
           font-size: 20px;
           text-align: left;
+          font-family: monospace;
         }
 
         .custom-card {
           background-color: #465362;
           color: white; 
           border: 1px solid #FFFFFF;
-          height: 500px;
+          height: 550px;
         }
 
         .custom-card .card-body {
@@ -47,14 +51,12 @@
   </head>
   
   <body style="background-color:#020023">
-    <nav style="background-color: #426B69;">
+    <nav style="background-color: #426b69; font-family: monospace;">
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+            <a href="#!" class="brand-logo center" style="font-family: Haettenschweiler;">{% block page %}<em>F l e x</em> F i t{% endblock %}</a>
             <ul id="nav-mobile" class="left">
                 <li><a href="/homePage">Home</a></li>
                 <li><a href="/browseWorkoutsPage">Browse Workouts</a></li>
-                <!-- <li><a href="/">Workout Information</a></li> -->
-                <li><a href="/">Edit My Routines</a></li>
                 <li><a href="/myRoutinesPage">My Routines</a></li>
             </ul>
             <ul id="nav-mobile" class="right">
