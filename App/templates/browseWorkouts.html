@@ -14,18 +14,18 @@
     
     <style>
         body {
-          color: white;
+          color: #2d6c6a;
           font-family: monospace;
         }
         h2 {
-          color: white; 
+          color:#020023 ; 
           text-shadow: 2px 2px 4px #465362; 
           font-size: 25px;
           font-weight: bold;
           font-style: italic;
         }
         p {
-          color: white; 
+          color: #2d6c6a; 
           text-shadow: 1px 1px 2px #465362; 
           margin-bottom: 10px; 
           font-size: 20px;
@@ -36,7 +36,7 @@
 
   </head>
   
-  <body style="background-color:#020023">
+  <body style="background-color:#D8F3F2">
     <nav style="background-color: #426b69; font-family: monospace;">
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo center" style="font-family: Haettenschweiler;">{% block page %}<em>F l e x</em> F i t{% endblock %}</a>
@@ -60,11 +60,11 @@
             <p>___________________________________________________________________________________________________________</p>
             <h2>{{ workout.title }}</h2>
             <p>Description: {{ workout.description}}</p>
-            <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: #78bebc; color: white; border: 1px white; border-radius: 2px;">Show details</a>
+            <a href="/workout/{{ workout.id }}" class="btn waves-effect waves-light" style="background-color: #020023; color: white; border: 1px white; border-radius: 2px;">Show details</a>
             
             <!-- Add to my routine button -->
             <form action="{{ url_for('auth_views.add_to_routine', workout_id=workout.id) }}" method="post" id="add-to-routine-form">
-              <button type="submit" class="waves-effect waves-light btn right" id="add-to-routine-button">Add to my routines</button>
+              <button type="submit" class="waves-effect waves-light btn right" id="add-to-routine-button" style="background-color: #020023; color: white;">Add to my routines</button>
             </form>
             <!---->
 
