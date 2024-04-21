@@ -1,6 +1,11 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
+# ----
+from flask import current_app
+import logging
+# ----
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False, unique=True)
@@ -46,7 +51,7 @@ class Workout(db.Model):
         self.rating = rating
         self.rating_desc = rating_desc
 
-# routine model
+
 class Routine(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -59,6 +64,7 @@ class Routine(db.Model):
         self.user_id = user_id
         self.workout_id = workout_id
     
+    
     @classmethod
     def add_workout_to_routine(cls, user_id, workout_id):
         try:
@@ -70,14 +76,18 @@ class Routine(db.Model):
             return False
         return True
     
-    def delete_workout_from_routine(self, user_id, workout_id):
-        routine = Routine.query.filter_by(user_id=user_id, workout_id=workout_id).first()
-        if routine:
-            try:
+    @staticmethod
+    def delete_workout_from_routine(user_id, workout_id):
+        try:
+            routine = Routine.query.filter_by(user_id=user_id, workout_id=workout_id).first()
+            if routine:
                 db.session.delete(routine)
                 db.session.commit()
                 return True
-            except:
-                db.session.rollback()
+            else:
                 return False
-        return False
+        except Exception as e:
+            current_app.logger.error(f"Error deleting workout from routine: {e}")
+            db.session.rollback()
+            return False
+

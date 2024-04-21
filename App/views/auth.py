@@ -99,6 +99,18 @@ def add_to_routine(workout_id):
     return redirect(url_for('auth_views.myRoutines_page'))
 # ----
 
+@auth_views.route('/delete_from_routine/<int:workout_id>', methods=['POST'])
+@jwt_required()
+def delete_from_routine(workout_id):
+    if Routine.delete_workout_from_routine(current_user.id, workout_id):
+        flash('Workout removed from My Routines')
+    else:
+        flash('Failed to remove workout from My Routines')
+    return redirect(url_for('auth_views.myRoutines_page'))
+
+
+# ----
+
 
 '''
 API Routes
@@ -134,8 +146,3 @@ def user_signup_api():
     response = jsonify(access_token=token, message='Signup Successful')
     set_access_cookies(response, token)
     return response
-
-# ----
-
-
-# ----

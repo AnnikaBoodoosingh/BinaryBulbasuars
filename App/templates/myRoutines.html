@@ -41,16 +41,15 @@
             </div>
         </nav>
 
-        <!-- My Workouts -->
+        <!-- My Routine -->
         <div class="container">
-            <h2>{{ current_user.username }}'s Routines</h3>
+            <h2>{{ current_user.username }}'s Routine</h3>
             <hr style="width: 100%;">
-            <h4>My Workouts</h4>
             <div class="row">
                 {% for routine in current_user.routines %}
                 <div class="col s12 m6 14">
                     <div class="card">
-                        <div class="card-content">
+                        <div class="card-content" style="color: #020023;">
                             <span class="card-title activator grey-text text-darken-4">
                                 {{ routine.workout.title }}
                                 <i class="material-icons right">more_vert</i>
@@ -58,9 +57,15 @@
                             <p><strong>Type:</strong> {{ routine.workout.type }}<br></p>
                             <p><strong>Body Part:</strong> {{ routine.workout.body_part }}<br></p>
                             <p><strong>Equipment:</strong> {{ routine.workout.equipment }}<br></p>  
-                        
                         </div>
-                        <div class="card-reveal">
+                        <!-- delete button -->
+                        <div class="card-action">
+                            <form action="/delete_from_routine/{{ routine.workout.id }}" method="POST">
+                                <button type="submit" class="btn waves-effect waves-light grey">Delete Workout</button>
+                            </form>                            
+                        </div>
+                        <!---->
+                        <div class="card-reveal" style="color: #020023;">
                             <span class="card-title grey-text text-darken-4">
                                 {{ routine.workout.title }}
                                 <i class="material-icons right">close</i>
@@ -69,7 +74,6 @@
                             <p><strong>Level:</strong> {{ routine.workout.level }}</p>
                             <p><strong>Rating:</strong> {{ routine.workout.rating }}</p>
                             <p><strong>Rating Description:</strong> {{ routine.workout.rating_desc }}</p>
-            
                         </div>
 
                     </div>
@@ -77,118 +81,23 @@
                 {% endfor %}
 
             </div>
-            <hr style="width: 100%;">
         </div>
 
-
+        <!-- add to routine -->
         <div class="container">
-            <h4>My Routines</h4>
             <div class="row">
-                <form id="createRoutineForm">
-                    <div class="input-field col s12">
-                        <input id="routineName" type="text" class="validate" required>
-                        <label for="routineName">Create New Routine</label>
-                        <button class="btn waves-effect waves-light" onclick="createRoutine()">Create Routine</button>
-                    </div>
-                </form>
-                
-
-                <div class="container" id="routinesContainer">
-                    <!-- routine cards -->
-        
-                    {% for routine in current_user.routines %}
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title">{{ routine }}</span>
-                                <button class="btn waves-effect waves-light" onclick="addWorkoutsToRoutine('{{ routine }}')">Add Workouts</button>
-                            </div>
-                            <div class="card-action">
-                                <button class="btn waves-effect waves-light red" onclick="deleteRoutine('{{ routine }}')">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-        
+                <div class="col s12 center-align">
+                    <a href="/browseWorkoutsPage" class="btn waves-effect waves-light">Add to My Routine</a>
                 </div>
-        
             </div>
         </div>
+        <!---->
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                loadRoutinesFromLocalStorage();
-            });
-        
-            function createRoutine() {
-                var routineNameInput = document.getElementById('routineName');
-                var routineName = routineNameInput.value.trim();
-        
-                if (!routineName) {
-                    alert('Please enter a routine name');
-                    return;
-                }
-        
-                addRoutineToDOM(routineName);
-                saveRoutineToLocalStorage();
-                routineNameInput.value = '';
-            }
-        
-            function addRoutineToDOM(routineName) {
-                var routinesContainer = document.getElementById('routinesContainer');
-                var card = document.createElement('div');
-                card.className = 'col s12 m6 l4';
-                card.innerHTML = `
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">${routineName}</span>
-                            <button class="btn waves-effect waves-light" onclick="addWorkoutsToRoutine('${routineName}')">Add Workouts</button>
-                        </div>
-                        <div class="card-action">
-                            <button class="btn waves-effect waves-light grey" onclick="deleteRoutine(this,'${routineName}')">Delete Routine</button>
-                        </div>
-                    </div>
-                `;
-                routinesContainer.appendChild(card);
-            }
-        
-            function loadRoutinesFromLocalStorage() {
-                var routines = JSON.parse(localStorage.getItem('routines')) || [];
-                routines.forEach(function(routineName) {
-                    addRoutineToDOM(routineName);
-                });
-            }
-        
-            function saveRoutineToLocalStorage() {
-                var routines = [];
-                var routineCards = document.querySelectorAll('#routinesContainer .card-title');
-                routineCards.forEach(function(card) {
-                    var routineName = card.innerText.trim();
-                    routines.push(routineName);
-                });
-                localStorage.setItem('routines', JSON.stringify(routines));
-            }
-        
-            function deleteRoutine(button, routineName) {
-                var cardElement = button.closest('.col');
-                cardElement.remove();
-                removeFromLocalStorage(routineName);
-            }
-        
-            function removeFromLocalStorage(routineName) {
-                var routines = JSON.parse(localStorage.getItem('routines')) || [];
-                var index = routines.indexOf(routineName);
-                if (index !== -1) {
-                    routines.splice(index, 1);
-                    localStorage.setItem('routines', JSON.stringify(routines));
-                }
-            }
-        </script>
-        
+             
         
         
       
